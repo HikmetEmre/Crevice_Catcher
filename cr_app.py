@@ -55,18 +55,17 @@ Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
 
 
 if Image is not None:
-    # Convert the uploaded image to a PIL image
-    pil_image = PILImage.open(Image)
+    # Convert the uploaded image to a numpy array using cv2
+    img_bytes = Image.read()  # Read the uploaded image as bytes
+    nparr = np.frombuffer(img_bytes, np.uint8)  # Convert bytes to numpy array
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)  # Convert numpy array to image
 
     # Resize the image (optional)
     target_size = (256, 256)
-    pil_image_resized = pil_image.resize(target_size, PILImage.ANTIALIAS)
-
-    # Convert the PIL image to a numpy array
-    img_array = np.array(pil_image_resized)
+    img_resized = cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
 
     # Normalize the image to [0, 1] and convert to float32
-    input_data = img_array.astype(np.float32) / 255.0
+    input_data = img_resized.astype(np.float32) / 255.0
 
 
 #---------------------------------------------------------------------------------------------------------------------
