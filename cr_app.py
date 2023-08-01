@@ -50,15 +50,12 @@ st.image("https://raw.githubusercontent.com/HikmetEmre/Crevice_Catcher/main/meta
 ### Sidebar Markdown ###
 st.sidebar.markdown("**UPLOAD** , **:red[Wall Image] Below & See The Condition Concrete wall!")
 
-### Define Sidebar Input's ###
-Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
-
 import streamlit as st
 import numpy as np
 from PIL import Image as PILImage
 
-# File uploader in Streamlit sidebar
-Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
+# File uploader in Streamlit sidebar with a unique key
+Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"], key="unique_file_uploader_key")
 
 if Image is not None:
     # Read the uploaded image using PIL.Image.open
@@ -86,9 +83,7 @@ if Image is not None:
     # output_data = interpreter.get_tensor(output_details[0]['index'])
 
     # Display the uploaded image
-    st.image(img_resized, caption='Uploaded Image', use_column_width=True)
-else:
-    st.warning("Upload an image using the file uploader on the sidebar.")
+    st.image(img
 
 
 #---------------------------------------------------------------------------------------------------------------------
