@@ -53,7 +53,12 @@ st.sidebar.markdown("**UPLOAD** , **:red[Wall Image] Below & See The Condition C
 ### Define Sidebar Input's ###
 Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
 
+import streamlit as st
+import numpy as np
+from PIL import Image as PILImage
 
+# File uploader in Streamlit sidebar
+Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
 
 if Image is not None:
     # Read the uploaded image using PIL.Image.open
@@ -84,6 +89,7 @@ if Image is not None:
     st.image(img_resized, caption='Uploaded Image', use_column_width=True)
 else:
     st.warning("Upload an image using the file uploader on the sidebar.")
+
 
 #---------------------------------------------------------------------------------------------------------------------
 
