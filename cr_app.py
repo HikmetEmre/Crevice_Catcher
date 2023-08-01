@@ -89,9 +89,6 @@ if Image is not None:
 #---------------------------------------------------------------------------------------------------------------------
 
 ### Recall Model ###
-import tensorflow as tf
-import cv2
-import numpy as np
 
 # Load the TensorFlow Lite model
 interpreter = tf.lite.Interpreter(model_path='quantized_model.tflite')
