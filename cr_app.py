@@ -54,19 +54,36 @@ st.sidebar.markdown("**UPLOAD** , **:red[Wall Image] Below & See The Condition C
 Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
 
 
+
 if Image is not None:
-    # Convert the uploaded image to a numpy array using cv2
-    img_bytes = Image.read()  # Read the uploaded image as bytes
-    nparr = np.frombuffer(img_bytes, np.uint8)  # Convert bytes to numpy array
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)  # Convert numpy array to image
+    # Read the uploaded image using PIL.Image.open
+    pil_image = PILImage.open(Image)
+
+    # Convert the PIL image to a numpy array
+    img_array = np.array(pil_image)
 
     # Resize the image (optional)
     target_size = (256, 256)
-    img_resized = cv2.resize(img, target_size, interpolation=cv2.INTER_AREA)
+    img_resized = PILImage.fromarray(img_array).resize(target_size)
+
+    # Convert the resized PIL image to a numpy array
+    img_resized_array = np.array(img_resized)
 
     # Normalize the image to [0, 1] and convert to float32
-    input_data = img_resized.astype(np.float32) / 255.0
+    input_data = img_resized_array.astype(np.float32) / 255.0
 
+    # Now you can use 'input_data' for inference with your TensorFlow Lite model
+    # ...
+
+    # Example: Run inference using TensorFlow Lite interpreter
+    # interpreter.set_tensor(input_details[0]['index'], np.expand_dims(input_data, axis=0))
+    # interpreter.invoke()
+    # output_data = interpreter.get_tensor(output_details[0]['index'])
+
+    # Display the uploaded image
+    st.image(img_resized, caption='Uploaded Image', use_column_width=True)
+else:
+    st.warning("Upload an image using the file uploader on the sidebar.")
 
 #---------------------------------------------------------------------------------------------------------------------
 
