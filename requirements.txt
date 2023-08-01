@@ -1,0 +1,8 @@
+numpy==1.23.4
+pandas==1.4.3
+matplotlib==3.6.2
+joblib==1.2.0
+streamlit==1.23.1
+scikit-learn==1.2.2
+opencv-python==4.8.0.74
+tensorflow==2.12.0
