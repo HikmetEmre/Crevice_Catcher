@@ -1,6 +1,5 @@
 ### New App For Wall crack detection ###
 import numpy as np
-import tensorflow as tf
 from matplotlib import pyplot as plt
 import cv2
 from PIL import Image as PILImage
@@ -89,7 +88,8 @@ if Image is not None:
 #---------------------------------------------------------------------------------------------------------------------
 
 ### Recall Model ###
-
+import tensorflow as tf
+             
 interpreter = tf.lite.Interpreter(model_path='quantized_model.tflite')
 interpreter.allocate_tensors()
 
