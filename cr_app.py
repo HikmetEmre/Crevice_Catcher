@@ -49,8 +49,6 @@ st.image("https://raw.githubusercontent.com/HikmetEmre/Crevice_Catcher/main/meta
 ### Sidebar Markdown ###
 st.sidebar.markdown("**UPLOAD** , **:red[Wall Image] Below & See The Condition Concrete wall!")
 
-import streamlit as st
-import numpy as np
 from PIL import Image as PILImage
 
 # File uploader in Streamlit sidebar with a unique key
@@ -73,23 +71,12 @@ if Image is not None:
     # Normalize the image to [0, 1] and convert to float32
     input_data = img_resized_array.astype(np.float32) / 255.0
 
-    # Now you can use 'input_data' for inference with your TensorFlow Lite model
-    # ...
-
-    # Example: Run inference using TensorFlow Lite interpreter
-    # interpreter.set_tensor(input_details[0]['index'], np.expand_dims(input_data, axis=0))
-    # interpreter.invoke()
-    # output_data = interpreter.get_tensor(output_details[0]['index'])
-
-    # Display the uploaded image
-    st.image(img
-
 
 #---------------------------------------------------------------------------------------------------------------------
 
 ### Recall Model ###
 import tensorflow as tf
-             
+
 interpreter = tf.lite.Interpreter(model_path='quantized_model.tflite')
 interpreter.allocate_tensors()
 
