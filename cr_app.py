@@ -49,8 +49,13 @@ st.image("https://raw.githubusercontent.com/HikmetEmre/Crevice_Catcher/main/meta
 st.sidebar.markdown("**UPLOAD** , **:red[Wall Image] Below & See The Condition Concrete wall!")
 
 ### Define Sidebar Input's ###
-Image = st.sidebar.file_uploader
+Image = st.sidebar.file_uploader("Upload an image", type=["jpg", "png"])
 
+if Image is not None:
+    # Read and preprocess the uploaded image
+    img = cv2.imdecode(np.fromstring(Image.read(), np.uint8), cv2.IMREAD_COLOR)
+    img = cv2.resize(img, (256, 256))
+    input_data = img.astype(np.float32) / 255.0  # Normalize the image to [0, 1]
 
 
 #---------------------------------------------------------------------------------------------------------------------
@@ -68,10 +73,6 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-
-img = cv2.imread(Image)
-img = cv2.resize(img, (256, 256))
-input_data = img.astype(np.float32) / 255.0  # Normalize the image to [0, 1]
 
 # Set the input tensor
 interpreter.set_tensor(input_details[0]['index'], np.expand_dims(input_data, axis=0))
