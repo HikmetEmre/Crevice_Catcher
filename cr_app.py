@@ -90,7 +90,6 @@ if Image is not None:
 
 ### Recall Model ###
 
-# Load the TensorFlow Lite model
 interpreter = tf.lite.Interpreter(model_path='quantized_model.tflite')
 interpreter.allocate_tensors()
 
