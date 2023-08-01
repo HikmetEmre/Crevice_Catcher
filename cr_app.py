@@ -73,6 +73,7 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
+img = cv2.imread(Image)
 input_data = img.astype(np.float32) / 255.0
 # Set the input tensor
 interpreter.set_tensor(input_details[0]['index'], np.expand_dims(input_data, axis=0))
